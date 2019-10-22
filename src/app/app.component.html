@@ -1,0 +1,56 @@
+<div class="container">
+    <ais-instantsearch [config]="config">
+
+        <div class="search-panel">
+
+            <div class="search-panel__filters">
+                <ais-refinement-list attribute="data.category"></ais-refinement-list>
+            </div>
+
+            <div class="search-panel__results">
+
+                <div class="searchbox">
+                    <ais-search-box placeholder="100+ templates"></ais-search-box>
+                </div>
+
+                <ais-stats>
+                    <ng-template let-state="state">
+                        {{state.nbHits}} results found in {{state.processingTimeMS}}ms.
+                    </ng-template>
+                </ais-stats>
+
+                <br>
+
+                <ais-hits>
+                    <ng-template let-hits="hits" let-results="results">
+                        <div *ngIf="hits.length === 0">
+                            No results found matching <strong></strong>.
+                        </div>
+
+                        <ol class="ais-Hits-list">
+                            <li class="ais-Hits-item" *ngFor="let hit of hits">
+                                    objectID: {{hit.objectID}}:
+                                <article>
+                                    <h1>
+                                        <ais-highlight attribute="data.title" [hit]="hit"></ais-highlight>
+                                    </h1>
+                                    Q's:
+                                    <ais-highlight attribute="data.no-of-qns" [hit]="hit"></ais-highlight>
+                                    <br>
+                                    <br>
+                                    <ais-highlight attribute="data.description" [hit]="hit"></ais-highlight>
+
+                                </article>
+                            </li>
+                        </ol>
+                    </ng-template>
+                </ais-hits>
+
+                <div class="pagination">
+                    <ais-pagination></ais-pagination>
+                </div>
+            </div>
+
+        </div>
+    </ais-instantsearch>
+</div>
