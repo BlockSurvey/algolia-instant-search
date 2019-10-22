@@ -1,0 +1,1 @@
+# algolia-instant-search
